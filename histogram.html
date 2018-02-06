@@ -60,8 +60,8 @@
 
     var formatDateIntoYear = d3.timeFormat("%Y");
 
-    var startDate = new Date("2004-11-01"),
-        endDate = new Date("2017-04-01");
+    var startDate = new Date("2016-01-01"),
+        endDate = new Date("2016-12-31  ");
 
     var dateArray = d3.timeYears(startDate, d3.timeYear.offset(endDate, 1));
 
@@ -85,6 +85,11 @@
     // set parameters for histogram
     var histogram = d3.histogram()
         .value(function(d) { return d.date; })
+        .domain(x.domain())
+        .thresholds(x.ticks(d3.timeMonth));
+
+    var histo = d3.histogram()
+        .value(function(d) { return format(d.fields.date_debut); })
         .domain(x.domain())
         .thresholds(x.ticks(d3.timeMonth));
 
@@ -114,7 +119,52 @@
         // group data for bars
         var bins = histogram(data);
 
+        console.log(bins)
+        console.log(bins[0]);
+
         // y domain based on binned data
+        y.domain([0, d3.max(bins, function(d) { return d.length; })]);
+
+        // var bar = hist.selectAll(".bar")
+        //     .data(bins)
+        //     .enter()
+        //     .append("g")
+        //     .attr("class", "bar")
+        //     .attr("transform", function(d) {
+        //         return "translate(" + x(d.x0) + "," + y(d.length) + ")";
+        //     });
+        //
+        // bar.append("rect")
+        //     .attr("class", "bar")
+        //     .attr("x", 1)
+        //     .attr("width", function(d) { return x(d.x1) - x(d.x0) - 1; })
+        //     .attr("height", function(d) { return histHeight - y(d.length); })
+        //     .attr("fill", function(d) { return colours(d.x0); });
+        //
+        // bar.append("text")
+        //     .attr("dy", ".75em")
+        //     .attr("y", "6")
+        //     .attr("x", function(d) { return (x(d.x1) - x(d.x0))/2; })
+        //     .attr("text-anchor", "middle")
+        //     .text(function(d) { if (d.length>15) { return d.length; } })
+        //     .style("fill", "white");
+
+        dataset = data;
+    });
+
+
+    ////////// slider //////////
+
+    d3.json("data/tournagesdefilmsparis2011.json",function(error,data){
+        if (error) throw error;
+        // Checking
+        var m=format(data[0].fields.date_debut).getMonth();
+        console.log(m);
+
+        var bins = histo(data);
+        console.log(bins[0])
+        console.log(bins)
+
         y.domain([0, d3.max(bins, function(d) { return d.length; })]);
 
         var bar = hist.selectAll(".bar")
@@ -141,16 +191,6 @@
             .text(function(d) { if (d.length>15) { return d.length; } })
             .style("fill", "white");
 
-        dataset = data;
-    });
-
-
-    ////////// slider //////////
-
-    d3.json("data/tournagesdefilmsparis2011.json",function(error,data){
-        if (error) throw error;
-        var m=format(data[0].fields.date_debut).getMonth();
-        console.log(m)
 
     });
 
