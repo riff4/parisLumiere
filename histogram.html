@@ -147,8 +147,69 @@
             .text(function(d) { if (d.length>15) { return d.length; } })
             .style("fill", "white");
 
-
+        dataset=data
     });
+
+    var slider = svg.append("g")
+        .attr("class", "slider")
+        .attr("transform", "translate(" + margin.left + "," + (margin.top+histHeight+5) + ")");
+
+    slider.append("line")
+        .attr("class", "track")
+        .attr("x1", x.range()[0])
+        .attr("x2", x.range()[1])
+        .select(function() { return this.parentNode.appendChild(this.cloneNode(true)); })
+        .attr("class", "track-inset")
+        .select(function() { return this.parentNode.appendChild(this.cloneNode(true)); })
+        .attr("class", "track-overlay")
+        .call(d3.drag()
+            .on("start.interrupt", function() { slider.interrupt(); })
+            .on("start drag", function() {
+                currentValue = d3.event.x;
+                update(x.invert(currentValue));
+            })
+        );
+
+    var lMonths=['Jan','Fev','Mar','Apr','May','Jun','Jul','Aug','Sept','Oct','Nov','Dec']
+
+    slider.insert("g", ".track-overlay")
+        .attr("class", "ticks")
+        .attr("transform", "translate("+ - 35+"," + 18 + ")")
+        .selectAll("text")
+        .data(x.ticks(10))
+        .enter()
+        .append("text")
+        .attr("x", x)
+        .attr("y", 10)
+        .attr("text-anchor", "middle")
+        .text(function(d,i) { return lMonths[i] });
+
+    var handle = slider.insert("circle", ".track-overlay")
+        .attr("class", "handle")
+        .attr("r", 9);
+
+
+
+    function update(h) {
+        handle.attr("cx", x(h));
+
+        // filter data set and redraw plot
+        var newData = dataset.filter(function(d) {
+            return d.date < h;
+        })
+        //drawPlot(newData);
+
+        // histogram bar colours
+        d3.selectAll(".bar")
+            .attr("fill", function(d) {
+                if (d.x0 < h) {
+                    return colours(d.x0);
+                } else {
+                    return "#eaeaea";
+                }
+            })
+    }
+
 
 
 
