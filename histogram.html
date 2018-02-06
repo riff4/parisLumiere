@@ -204,13 +204,13 @@
             .append("circle")
             .attr("class", "location")
             .attr("cx", function(d) { return format(d.fields.date_debut).getMonth()*71+35+(-15)+format(d.fields.date_debut).getDate(); })
-            .attr("cy", function(d) { return Math.random()*((height/2+150)-(height/2-150))+(height/2-150); })
+            //.attr("cy", function(d) { return Math.random()*((height/2+150)-(height/2-150))+(height/2-150); })
+            .attr("cy", function(d) { return (d.fields.ardt-75000)/20*((height/2+150)-(height/2-150))+(height/2-150); })
             .style("fill", function(d) { return colours(d3.timeMonth(format(d.fields.date_debut))); })
             //.style("stroke", function(d) { return colours(d3.timeYear(d.date)); })
             .style("opacity", 0.3)
             .attr("r", 5)
 ;
-
         // if filtered dataset has less circles than already existing, remove excess
         locations.exit()
             .remove();
