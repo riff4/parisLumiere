@@ -116,7 +116,7 @@
     d3.json("data/tournagesdefilmsparis2011.json",function(error,data){
         if (error) throw error;
         // Checking
-        console.log(data[1500].fields.date_debut)
+        console.log(data[1500].recordid)
         console.log(format(data[1500].fields.date_debut))
         var m=format(data[1500].fields.date_debut).getDate();
         console.log(m)
@@ -197,12 +197,8 @@
 
     function drawPlot(data) {
         var locations = plot.selectAll(".location")
-            .data(data, function(d) { return d; });
+            .data(data, function(d) { return d.recordid; });
 
-        var m = format(data[0].fields.date_debut)
-        console.log(m.getMonth())
-        console.log(colours(m.getMonth()))
-        console.log(colours.domain)
         // if filtered dataset has more circles than already existing, transition new ones in
         locations.enter()
             .append("circle")
