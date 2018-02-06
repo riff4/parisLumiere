@@ -55,7 +55,6 @@
 
     var histHeight = height/5;
 
-    var parseDate = d3.timeParse("%d-%b-%y");
     var format = d3.timeParse("%Y-%m-%d");
 
     var formatDateIntoYear = d3.timeFormat("%Y");
@@ -117,8 +116,10 @@
     d3.json("data/tournagesdefilmsparis2011.json",function(error,data){
         if (error) throw error;
         // Checking
-        var m=format(data[0].fields.date_debut).getMonth();
-
+        console.log(data[1500].fields.date_debut)
+        console.log(format(data[1500].fields.date_debut))
+        var m=format(data[1500].fields.date_debut).getDate();
+        console.log(m)
         var bins = histo(data);
 
         y.domain([0, d3.max(bins, function(d) { return d.length; })]);
@@ -198,21 +199,21 @@
         var locations = plot.selectAll(".location")
             .data(data, function(d) { return d; });
 
+        var m = format(data[0].fields.date_debut)
+        console.log(m.getMonth())
+        console.log(colours(m.getMonth()))
+        console.log(colours.domain)
         // if filtered dataset has more circles than already existing, transition new ones in
         locations.enter()
             .append("circle")
             .attr("class", "location")
-            .attr("cx", function(d) { return format(d.fields.date_debut).getMonth()*71+35+-15+8*format(d.fields.date_debut).getDay(); })
-            .attr("cy", function(d) { return Math.random()*((height/2+150)-(height/2-150))+(height/2-150); })
+            .attr("cx", function(d) { return format(d.fields.date_debut).getMonth()*71+35+(-15)+format(d.fields.date_debut).getDate(); })
+            .attr("cy", function(d) { return format(d.fields.date_debut).getDate()/30*((height/2+150)-(height/2-150))+(height/2-150); })
             .style("fill", function(d) { return colours(format(d.fields.date_debut).getMonth()); })
             //.style("stroke", function(d) { return colours(d3.timeYear(d.date)); })
             .style("opacity", 0.3)
             .attr("r", 5)
-            .transition()
-            .duration(400)
-            .attr("r", 15)
-            .transition()
-            .attr("r", 5);
+;
 
         // if filtered dataset has less circles than already existing, remove excess
         locations.exit()
