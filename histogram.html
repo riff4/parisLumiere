@@ -56,6 +56,8 @@
     var histHeight = height/5;
 
     var parseDate = d3.timeParse("%d-%b-%y");
+    var format = d3.timeParse("%Y-%m-%d");
+
     var formatDateIntoYear = d3.timeFormat("%Y");
 
     var startDate = new Date("2004-11-01"),
@@ -84,7 +86,7 @@
     var histogram = d3.histogram()
         .value(function(d) { return d.date; })
         .domain(x.domain())
-        .thresholds(x.ticks(d3.timeYear));
+        .thresholds(x.ticks(d3.timeMonth));
 
     var svg = d3.select("#vis")
         .append("svg")
@@ -140,11 +142,17 @@
             .style("fill", "white");
 
         dataset = data;
-        drawPlot(dataset);
-    })
+    });
 
 
     ////////// slider //////////
+
+    d3.json("data/tournagesdefilmsparis2011.json",function(error,data){
+        if (error) throw error;
+        var m=format(data[0].fields.date_debut).getMonth();
+        console.log(m)
+
+    });
 
 
 
