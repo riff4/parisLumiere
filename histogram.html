@@ -51,7 +51,7 @@
 <script>
     var margin = {top:50, right:50, bottom:0, left:50},
         width = 960 - margin.left - margin.right,
-        height = 500 - margin.top - margin.bottom;
+        height = 800 - margin.top - margin.bottom;
 
     var histHeight = height/5;
 
@@ -170,19 +170,22 @@
             })
         );
 
-    var lMonths=['Jan','Fev','Mar','Apr','May','Jun','Jul','Aug','Sept','Oct','Nov','Dec']
+    var lMonths=['Jan','Fev','Mar','Apr','May','Jun','Jul','Aug','Sept','Oct','Nov','Dec'];
+
 
     slider.insert("g", ".track-overlay")
         .attr("class", "ticks")
         .attr("transform", "translate("+ - 35+"," + 18 + ")")
         .selectAll("text")
-        .data(x.ticks(10))
+        .data(lMonths)
         .enter()
         .append("text")
-        .attr("x", x)
+        .attr("x", function (d,i) {
+            return i*71+74
+        })
         .attr("y", 10)
         .attr("text-anchor", "middle")
-        .text(function(d,i) { return lMonths[i] });
+        .text(function(d,i) { return d });
 
     var handle = slider.insert("circle", ".track-overlay")
         .attr("class", "handle")
