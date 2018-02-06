@@ -148,6 +148,8 @@
             .style("fill", "white");
 
         dataset=data
+        drawPlot(dataset);
+
     });
 
     var slider = svg.append("g")
@@ -192,15 +194,41 @@
         .attr("r", 9);
 
 
+    function drawPlot(data) {
+        var locations = plot.selectAll(".location")
+            .data(data, function(d) { return d; });
+
+        // if filtered dataset has more circles than already existing, transition new ones in
+        locations.enter()
+            .append("circle")
+            .attr("class", "location")
+            .attr("cx", function(d) { return format(d.fields.date_debut).getMonth()*71+35+-15+8*format(d.fields.date_debut).getDay(); })
+            .attr("cy", function(d) { return Math.random()*((height/2+150)-(height/2-150))+(height/2-150); })
+            .style("fill", function(d) { return colours(format(d.fields.date_debut).getMonth()); })
+            //.style("stroke", function(d) { return colours(d3.timeYear(d.date)); })
+            .style("opacity", 0.3)
+            .attr("r", 5)
+            .transition()
+            .duration(400)
+            .attr("r", 15)
+            .transition()
+            .attr("r", 5);
+
+        // if filtered dataset has less circles than already existing, remove excess
+        locations.exit()
+            .remove();
+    }
+
+
 
     function update(h) {
         handle.attr("cx", x(h));
 
         // filter data set and redraw plot
         var newData = dataset.filter(function(d) {
-            return d.date < h;
-        })
-        //drawPlot(newData);
+            return format(d.fields.date_debut) < h;
+        });
+        drawPlot(newData);
 
         // histogram bar colours
         d3.selectAll(".bar")
