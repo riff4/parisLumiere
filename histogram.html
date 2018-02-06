@@ -60,7 +60,7 @@
     var formatDateIntoYear = d3.timeFormat("%Y");
 
     var startDate = new Date("2016-01-01"),
-        endDate = new Date("2016-12-31");
+        endDate = new Date("2017-01-01");
 
     var dateArray = d3.timeMonth(startDate, endDate);
 
@@ -208,7 +208,7 @@
             .append("circle")
             .attr("class", "location")
             .attr("cx", function(d) { return format(d.fields.date_debut).getMonth()*71+35+(-15)+format(d.fields.date_debut).getDate(); })
-            .attr("cy", function(d) { return format(d.fields.date_debut).getDate()/30*((height/2+150)-(height/2-150))+(height/2-150); })
+            .attr("cy", function(d) { return Math.random()*((height/2+150)-(height/2-150))+(height/2-150); })
             .style("fill", function(d) { return colours(d3.timeMonth(format(d.fields.date_debut))); })
             //.style("stroke", function(d) { return colours(d3.timeYear(d.date)); })
             .style("opacity", 0.3)
