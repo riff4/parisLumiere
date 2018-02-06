@@ -62,7 +62,7 @@
     var startDate = new Date("2016-01-01"),
         endDate = new Date("2016-12-31");
 
-    var dateArray = d3.timeYears(startDate, d3.timeYear.offset(endDate, 1));
+    var dateArray = d3.timeMonth(startDate, endDate);
 
     var colours = d3.scaleOrdinal()
         .domain(dateArray)
@@ -209,7 +209,7 @@
             .attr("class", "location")
             .attr("cx", function(d) { return format(d.fields.date_debut).getMonth()*71+35+(-15)+format(d.fields.date_debut).getDate(); })
             .attr("cy", function(d) { return format(d.fields.date_debut).getDate()/30*((height/2+150)-(height/2-150))+(height/2-150); })
-            .style("fill", function(d) { return colours(format(d.fields.date_debut).getMonth()); })
+            .style("fill", function(d) { return colours(d3.timeMonth(format(d.fields.date_debut))); })
             //.style("stroke", function(d) { return colours(d3.timeYear(d.date)); })
             .style("opacity", 0.3)
             .attr("r", 5)
