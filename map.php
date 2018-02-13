@@ -2,15 +2,25 @@
 <meta charset="utf-8">
 <meta name="viewport" content="initial-scale=1.0, user-scalable=no"/>
 <style>
-html, body, #map {
+  
+html, body {
   width: 100%;
   height: 100%;
-  margin: 0;
-  padding: 0;
+  margin: 15;
+  margin-right: 30;
 }
+
+#map {
+  width: 100%;
+  height: 100%;
+  margin: 15;
+  margin-right: 30;
+}
+    
 .stations, .stations svg {
   position: absolute;
 }
+    
 .stations svg {
   width: 60px;
   height: 20px;
@@ -21,6 +31,7 @@ html, body, #map {
   fill: brown;
   stroke: black;
   stroke-width: 1.5px;
+
 }
 .tooltip {
   position: absolute;
@@ -32,7 +43,8 @@ html, body, #map {
   font-weight: bold;
   font: 11.5px sans-serif;
   border-radius: 2px;
-  pointer-events: none;    
+  pointer-events: none;  
+
 }
 </style>
 <div id="map"></div>
@@ -52,6 +64,7 @@ var map = new google.maps.Map(d3.select("#map").node(), {
 d3.json("data/tournagesdefilmsparis2011.json", function(error, data) {
   if (error) throw error;
   var overlay = new google.maps.OverlayView();
+    
   // Add the container when the overlay is added to the map.
   overlay.onAdd = function() {
     var tooltip = d3.select(this.getPanes().overlayLayer).append("div")
@@ -63,6 +76,7 @@ d3.json("data/tournagesdefilmsparis2011.json", function(error, data) {
     // Draw each marker as a separate SVG element.
     // We could use a single SVG, but what size would it have?
     overlay.draw = function() {
+            
       var projection = this.getProjection(),
           padding = 10;
       var marker = layer.selectAll("svg")
@@ -80,7 +94,8 @@ d3.json("data/tournagesdefilmsparis2011.json", function(error, data) {
           .attr("r", 8)
           .attr("cx", padding)
           .attr("cy", padding)
-      		.style("fill", function(d){var jour=format(d.value.fields.date_debut).getDay() + 30*format(d.value.fields.date_debut).getMonth(); return d3.interpolateRdBu(jour/370)})
+      		.style("fill", function(d){
+          var jour=format(d.value.fields.date_debut).getDay() + 30*format(d.value.fields.date_debut).getMonth(); return d3.interpolateRdBu(jour/370)})
       		.on("mouseover", function(d) {
               tooltip.transition()
                 .duration(200)
