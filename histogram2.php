@@ -126,7 +126,7 @@
                 for(var jj=0; jj<info.length;jj++) {
                     if (info[jj].id == data[i].recordid)
                     {
-                        data[i].fields.note=info[jj].vote
+                        data[i].fields.note=+info[jj].vote
                         data[i].fields.genre=info[jj].genre
                     }
                 }
