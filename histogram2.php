@@ -120,6 +120,21 @@
         console.log(m)
         var bins = histo(data);
 
+        d3.csv("filmInfo.csv", function(info) {
+
+            for (var i = 0; i < data.length; i++) {
+                for(var jj=0; jj<info.length;jj++) {
+                    if (info[jj].id == data[i].recordid)
+                    {
+                        data[i].fields.note=info[jj].vote
+                        data[i].fields.genre=info[jj].genre
+                    }
+                }
+            }
+
+        });
+
+
         y.domain([0, d3.max(bins, function(d) { return d.length; })]);
 
         var bar = hist.selectAll(".bar")
