@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" type="text/css" href="css_layout.css">
+    <link rel="stylesheet" type="text/css" href="histo_css.css">
+  <meta name="viewport" content="initial-scale=1.0, user-scalable=no"/>
+<script src="//maps.google.com/maps/api/js?librairies=place&key=AIzaSyDsYwvF3UUxTx8RB40wd4SnUVzfnbW66LM"></script>
+<script src="//d3js.org/d3.v4.min.js"></script>
+<script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+</head>
+
+<body>
+  
+<div class="column" style="width:40%;display:inline-block" >
+    <div id="vis"><script src="histogram_mois.js"></script></div>
+    <div id="vis"><script src="histogram_mois.js"></script></div>      
+    <div id="vis"><script src="histogram_mois.js"></script></div>  
+    <div>
+        <br /><br /> 
+        <form action="" method="get" class="formulaire">
+            <label>Genre du film :</label>
+  <input type="checkbox" name="vehicle1" value="Comedie" checked="checked"> Comédie
+  <input type="checkbox" name="vehicle2" value="Drame" checked="checked"> Drame
+  <input type="checkbox" name="vehicle3" value="Romance" checked="checked"> Romance
+  <input type="checkbox" name="vehicle4" value="Action" checked="checked"> Action
+  <input type="checkbox" name="vehicle5" value="Thriller" checked="checked"> Thriller
+        </form><br>
+      </div>
+</div>
+  
+<div class="column1" style="width:55%;height:600px;display:inline-block">
+    <div id="map"></div>
+</div>  
+    
+</body>
+<script src="map.js"></script>
