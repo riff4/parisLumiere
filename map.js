@@ -7,7 +7,8 @@ var map = new google.maps.Map(d3.select("#map").node(), {
   mapTypeId: google.maps.MapTypeId.TERRAIN
 });
 // Load the station data. When the data comes back, create an overlay.
-d3.json("data/tournagesdefilmsparis2011.json", function(error, data) {
+
+d3.json("data/dataComplete.json", function(error, data) {
   if (error) throw error;
   var overlay = new google.maps.OverlayView();
     
@@ -40,13 +41,14 @@ d3.json("data/tournagesdefilmsparis2011.json", function(error, data) {
           .attr("r", 8)
           .attr("cx", padding)
           .attr("cy", padding)
-      		.style("fill", function(d){
+          .attr("class","circle_map")
+          .style("fill", function(d){
           var jour=format(d.value.fields.date_debut).getDay() + 30*format(d.value.fields.date_debut).getMonth(); return d3.interpolateRdBu(jour/370)})
       		.on("mouseover", function(d) {
               tooltip.transition()
                 .duration(200)
                 .style("opacity", .9);
-              tooltip.html('Titre : '+d.value.fields.titre+'<br>'+'Réalisateur'+d.value.fields.realisateur+'<br>'+"Date de début : "+d.value.fields.date_debut+'<br>'+"Date de fin : "+d.value.fields.date_fin)
+              tooltip.html('Titre : '+d.value.fields.titre+'<br>'+'Réalisateur'+d.value.fields.realisateur+'<br>'+"Date de début : "+d.value.fields.date_debut+'<br>'+"Date de fin : "+d.value.fields.date_fin+'<br>'+"Note : "+d.value.fields.note+'<br>'+"Genre : "+d.value.fields.genre)
                 .style("left", (d3.event.pageX + 5) + "px")
                 .style("top", (d3.event.pageY - 28) + "px");
       	})
@@ -67,6 +69,7 @@ d3.json("data/tournagesdefilmsparis2011.json", function(error, data) {
       }
     };
   }
+  
   // Bind our overlay to the map…
   overlay.setMap(map);
 });

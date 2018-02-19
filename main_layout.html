@@ -2,7 +2,7 @@
 <head>
   <meta charset="utf-8">
   <link rel="stylesheet" type="text/css" href="css_layout.css">
-    <link rel="stylesheet" type="text/css" href="histo_css.css">
+    <link rel="stylesheet" type="text/css" href="histogramNote.css">
   <meta name="viewport" content="initial-scale=1.0, user-scalable=no"/>
 <script src="//maps.google.com/maps/api/js?librairies=place&key=AIzaSyDsYwvF3UUxTx8RB40wd4SnUVzfnbW66LM"></script>
 <script src="//d3js.org/d3.v4.min.js"></script>
@@ -11,26 +11,26 @@
 
 <body>
   
-<div class="column" style="width:40%;display:inline-block" >
-    <div id="vis"><script src="histogram_mois.js"></script></div>
-    <div id="vis"><script src="histogram_mois.js"></script></div>      
-    <div id="vis"><script src="histogram_mois.js"></script></div>  
-    <div>
-        <br /><br /> 
+<div class="column" style="width:45%;display:inline-block;margin-right:30px" >
+        <div>
+            <br />
         <form action="" method="get" class="formulaire">
             <label>Genre du film :</label>
-  <input type="checkbox" name="vehicle1" value="Comedie" checked="checked"> Comédie
-  <input type="checkbox" name="vehicle2" value="Drame" checked="checked"> Drame
-  <input type="checkbox" name="vehicle3" value="Romance" checked="checked"> Romance
-  <input type="checkbox" name="vehicle4" value="Action" checked="checked"> Action
-  <input type="checkbox" name="vehicle5" value="Thriller" checked="checked"> Thriller
-        </form><br>
+  <input type="checkbox" id="cb_comedie" name="comedie" value="Comedie" checked="checked"> Comédie
+  <input type="checkbox" id="cb_drame" name="drame" value="Drame" checked="checked"> Drame
+  <input type="checkbox" id="cb_romance" name="romance" value="Romance" checked="checked"> Romance
+  <input type="checkbox" id="cb_action" name="action" value="Action" checked="checked"> Action
+  <input type="checkbox" id="cb_thriller" name="thriller" value="Thriller" checked="checked"> Thriller
+        </form><br />
       </div>
+    <div id="vis_note"><script src="histogramNote.js"></script></div><br /> 
+    <div id="vis"><script src="histogram_mois.js"></script></div>
 </div>
-  
-<div class="column1" style="width:55%;height:600px;display:inline-block">
+    
+<div class="column1" style="width:54%;height:600px;display:inline-block">
     <div id="map"></div>
 </div>  
     
 </body>
+<script src="filter_genre.js"></script>
 <script src="map.js"></script>

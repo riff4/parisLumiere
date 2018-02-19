@@ -1,8 +1,8 @@
- var margin = {top:30, right:50, bottom:0, left:50},
-        width = 500 - margin.left - margin.right,
-        height = 160 - margin.top - margin.bottom;
+var margin = {top:20, right:50, bottom:0, left:20},
+        width = 600 - margin.left - margin.right,
+        height = 400 - margin.top - margin.bottom;
 
-    var histHeight = height*0.7;
+    var histHeight = height/4;
 
     var format = d3.timeParse("%Y-%m-%d");
 
@@ -49,7 +49,37 @@
     var hist = svg.append("g")
         .attr("class", "histogram")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
+    
+    var arc = d3.arc()
+        .outerRadius(height / 2)
+        .innerRadius(0)
+        .startAngle(0)
+        .endAngle(function(d) { return d.type=="w" ? -Math.PI : Math.PI; });
+    
+    var brush = d3.brushX()
+        .extent([[margin.left, margin.top],[width+margin.left, margin.top+histHeight]])
+        .on("start", brushstart)
+        .on("brush", brushmove)
+        .on("end", brushend);
+    
+    var gBrush = svg.append("h")
+        .attr("class", "brush")
+        .call(brush);
+    
+    var handle = gBrush.selectAll(".handle--custom")
+          .data([{type: "w"}, {type: "e"}])
+          .enter().append("path")
+            .attr("class", "handle--custom")
+            .attr("fill", "#666")
+            .attr("fill-opacity", 0.8)
+            .attr("stroke", "#000")
+            .attr("stroke-width", 1.5)
+            .attr("cursor", "ew-resize")
+            .attr("d", d3.arc()
+                .innerRadius(0)
+                .outerRadius(height / 2)
+                .startAngle(0)
+                .endAngle(function(d, i) { return i ? Math.PI : -Math.PI; }));
 
     ////////// plot set up //////////
 
@@ -62,7 +92,7 @@
 
     ////////// load data //////////
 
-    d3.json("data/tournagesdefilmsparis2011.json",function(error,data){
+    d3.json("data/dataComplete.json",function(error,data){
         if (error) throw error;
         // Checking
         console.log(data[1500].recordid)
@@ -96,54 +126,45 @@
             .attr("text-anchor", "middle")
             .text(function(d) { if (d.length>15) { return d.length; } })
             .style("fill", "white");
-
         dataset=data
-        //drawPlot(dataset);
+        drawPlot(data);
 
     });
 
-    var slider = svg.append("g")
-        .attr("class", "slider")
-        .attr("transform", "translate(" + margin.left + "," + (margin.top+histHeight+5) + ")");
-
-    slider.append("line")
-        .attr("class", "track")
-        .attr("x1", x.range()[0])
-        .attr("x2", x.range()[1])
-        .select(function() { return this.parentNode.appendChild(this.cloneNode(true)); })
-        .attr("class", "track-inset")
-        .select(function() { return this.parentNode.appendChild(this.cloneNode(true)); })
-        .attr("class", "track-overlay")
-        .call(d3.drag()
-            .on("start.interrupt", function() { slider.interrupt(); })
-            .on("start drag", function() {
-                currentValue = d3.event.x;
-                update(x.invert(currentValue));
-            })
-        );
+        
 
     var lMonths=['Jan','Fev','Mar','Apr','May','Jun','Jul','Aug','Sept','Oct','Nov','Dec'];
+    
+    
+    var brushg = svg.append("g")
+        .attr("class", "brush")
+        .call(brush);
+
+    brushg.call(brush.move, [x(startDate)+margin.left, x(endDate)+margin.left]);
+
+    brushstart();
+    brushmove();
+    
+    var min=margin.left;
+    var max=width+margin.left;
+
+    function brushstart() {
+
+    }
+
+    function brushmove() {  
+        var p = d3.brushSelection(brushg.node()),
+        s = p.map(x.invert);
+        update(x.invert(p[0]-margin.left),x.invert(p[1]-margin.left));
+        console.log(p);
+    }
+
+    function brushend() {
+
+    }
 
 
-    slider.insert("g", ".track-overlay")
-        .attr("class", "ticks")
-        .attr("transform", "translate("+ - 35+"," + 18 + ")")
-        .selectAll("text")
-        .data(lMonths)
-        .enter()
-        .append("text")
-        .attr("x", function (d,i) {
-            return i*71+74
-        })
-        .attr("y", 10)
-        .attr("text-anchor", "middle")
-        .text(function(d,i) { return d });
 
-    var handle = slider.insert("circle", ".track-overlay")
-        .attr("class", "handle")
-        .attr("r", 9);
-
-/*
     function drawPlot(data) {
         var locations = plot.selectAll(".location")
             .data(data, function(d) { return d.recordid; });
@@ -152,39 +173,37 @@
         locations.enter()
             .append("circle")
             .attr("class", "location")
-            .attr("cx", function(d) { return format(d.fields.date_debut).getMonth()*71+35+(-15)+format(d.fields.date_debut).getDate(); })
+            .attr("cx", function(d) { return format(d.fields.date_debut).getMonth()*45+(-0)+format(d.fields.date_debut).getDate(); })
             .style("fill", function(d) { return colours(d3.timeMonth(format(d.fields.date_debut))); })
             //.style("stroke", function(d) { return colours(d3.timeYear(d.date)); })
             .style("opacity", 0.3)
-            .attr("r", 5)
-            .attr("cy", function(d) { return Math.random()*((height/2+150)-(height/2-150))+(height/2-150); })
+            .attr("r", 4)
+            .attr("cy", function(d) { return Math.random()*((height/2+150)-(height/2-150))+(height/2-90); })
             .transition()
             .duration(400)
-            .attr("cy", function(d) { return (d.fields.ardt-75000)/20*((height/2+150)-(height/2-150))+(height/2-150); })
+            .attr("cy", function(d) { return (d.fields.ardt-75000)/22*((height/2+150)-(height/2-150))+(height/2-90); })
 ;
         // if filtered dataset has less circles than already existing, remove excess
         locations.exit()
             .remove();
-    }*/
+    }
 
 
-
-    function update(h) {
-        handle.attr("cx", x(h));
-
+    
+    function update(hmin,hmax) {
         // filter data set and redraw plot
         var newData = dataset.filter(function(d) {
-            return format(d.fields.date_debut) < h;
+            return (format(d.fields.date_debut) < hmax) && (format(d.fields.date_debut) > hmin);
         });
-        //drawPlot(newData);
-
+        drawPlot(newData);
         // histogram bar colours
         d3.selectAll(".bar")
             .attr("fill", function(d) {
-                if (d.x0 < h) {
+                if ((d.x0 < hmax) && (d.x0 >= hmin)) {
                     return colours(d.x0);
                 } else {
                     return "#eaeaea";
                 }
             })
     }
+
