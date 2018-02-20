@@ -97,7 +97,7 @@
             .attr("x", 1)
             .attr("width", function(d) { return x1(d.x1) - x1(d.x0) - 1; })
             .attr("height", function(d) { return histHeight1 - y1(d.length); })
-            .attr("fill", "red");
+            .attr("fill", function(d){d3.interpolateRdYlGn(d.x0/10)});
 
         bar1.append("text")
             .attr("dy", ".75em")
@@ -180,7 +180,7 @@
         d3.selectAll(".bar1")
             .attr("fill", function(d) {
                 if ((d.x0 < hmax) && (d.x0 >= hmin)) {
-                    return "red";
+                    return d3.interpolateRdYlGn(d.x0/10);
                 } else {
                     return "#eaeaea";
                 }
