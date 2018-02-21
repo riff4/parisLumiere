@@ -7,6 +7,14 @@ var map = new google.maps.Map(d3.select("#map").node(), {
   mapTypeId: google.maps.MapTypeId.TERRAIN
 });
 // Load the station data. When the data comes back, create an overlay.
+var startDate = new Date("2016-01-01"),
+    endDate = new Date("2017-01-01");
+
+var dateArray = d3.timeMonth(startDate, endDate);
+var colours = d3.scaleOrdinal()
+    .domain(dateArray)
+    .range(['#ffc388','#ffb269','#ffa15e','#fd8f5b','#f97d5a','#f26c58','#e95b56','#e04b51','#d53a4b','#c92c42','#bb1d36','#ac0f29','#9c0418','#8b0000']);
+
 
 d3.json("data/dataComplete.json", function(error, data) {
   if (error) throw error;
@@ -42,13 +50,12 @@ d3.json("data/dataComplete.json", function(error, data) {
           .attr("cx", padding)
           .attr("cy", padding)
           .attr("class","circle_map")
-          .style("fill", function(d){
-          var jour=format(d.value.fields.date_debut).getDay() + 30*format(d.value.fields.date_debut).getMonth(); return d3.interpolateRdBu(jour/370)})
+          .style("fill", function(d){return colours(format(d.value.fields.date_debut))})
       		.on("mouseover", function(d) {
               tooltip.transition()
                 .duration(200)
                 .style("opacity", .9);
-              tooltip.html('Titre : '+d.value.fields.titre+'<br>'+'Réalisateur'+d.value.fields.realisateur+'<br>'+"Date de début : "+d.value.fields.date_debut+'<br>'+"Date de fin : "+d.value.fields.date_fin+'<br>'+"Note : "+d.value.fields.note+'<br>'+"Genre : "+d.value.fields.genre)
+              tooltip.html('Titre : '+d.value.fields.titre+'<br>'+'Réalisateur : '+d.value.fields.realisateur+'<br>'+"Date de début : "+d.value.fields.date_debut+'<br>'+"Date de fin : "+d.value.fields.date_fin+'<br>'+"Note : "+d.value.fields.note+'<br>'+"Genre : "+d.value.fields.genre)
                 .style("left", (d3.event.pageX + 5) + "px")
                 .style("top", (d3.event.pageY - 28) + "px");
       	})
