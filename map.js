@@ -13,7 +13,7 @@ var startDate = new Date("2016-01-01"),
 var dateArray = d3.timeMonth(startDate, endDate);
 var colours = d3.scaleOrdinal()
     .domain(dateArray)
-    .range(['#ffc388','#ffb269','#ffa15e','#fd8f5b','#f97d5a','#f26c58','#e95b56','#e04b51','#d53a4b','#c92c42','#bb1d36','#ac0f29','#9c0418','#8b0000']);
+    .range(["#6f63bb","#8a60b0","#ba43b4","#c7519c","#d63a3a","#ff7f0e","#ffaa0e","#bcbd22","#78a641","#2ca030","#12a2a8","#1f83b4"]);
 
 
 d3.json("data/dataComplete.json", function(error, data) {
