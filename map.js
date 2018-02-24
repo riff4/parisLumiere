@@ -1,3 +1,4 @@
+
 var format = d3.timeParse("%Y-%m-%d");
 // Create the Google Map…
 var map = new google.maps.Map(d3.select("#map").node(), {
@@ -55,29 +56,30 @@ d3.json("data/dataComplete.json", function(error, data) {
           .attr("class","circle_map")
           .style("fill", function(d){return colours(format(d.value.fields.date_debut))})
       		.on("mouseover", function(d) {
-              tooltip.transition()
-                .duration(200)
-                .style("opacity", .9);
-              tooltip.html('Titre : '+d.value.fields.titre+'<br>'+'Réalisateur : '+d.value.fields.realisateur+'<br>'+"Date de début : "+d.value.fields.date_debut+'<br>'+"Date de fin : "+d.value.fields.date_fin+'<br>'+"Note : "+d.value.fields.note+'<br>'+"Genre : "+d.value.fields.genre)
-                .style("left", (d3.event.pageX + 5) + "px")
-                .style("top", (d3.event.pageY - 28) + "px");
-              var titreChoisi=this.__data__.value.fields.titre;
-              d3.selectAll(".circle_map")
-                  .filter(function(el){
-                      return titreChoisi!=el.value.fields.titre;
-                  })
-                  .transition()
-                  .duration(400)
-                  .style("opacity", 0.1);
+                dataNo=filter_function();
+                if(dataNo.includes(this.__data__.value.fields.titre)==false){
+                    tooltip.transition()
+                        .duration(200)
+                        .style("opacity", .9);
+                    tooltip.html('Titre : ' + d.value.fields.titre + '<br>' + 'Réalisateur : ' + d.value.fields.realisateur + '<br>' + "Date de début : " + d.value.fields.date_debut + '<br>' + "Date de fin : " + d.value.fields.date_fin + '<br>' + "Note : " + d.value.fields.note + '<br>' + "Genre : " + d.value.fields.genre)
+                        .style("left", (d3.event.pageX + 5) + "px")
+                        .style("top", (d3.event.pageY - 28) + "px");
+                    var titreChoisi = this.__data__.value.fields.titre;
+                    d3.selectAll(".circle_map")
+                        .filter(function (el) {
+                            return titreChoisi != el.value.fields.titre;
+                        })
+                        .transition()
+                        .duration(400)
+                        .style("opacity", 0);
+                }
             })
      	.on("mouseout", function(d) {
           tooltip.transition()
           .duration(200)
           .style("opacity", 0);
-          d3.selectAll("circle")
-              .transition()
-              .duration(400)
-              .style("opacity", 1);
+            dataNo=filter_function();
+
       });
       
       function transform(d) {
