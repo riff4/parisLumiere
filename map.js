@@ -19,14 +19,18 @@ var colours = d3.scaleOrdinal()
 
 d3.json("data/dataComplete.json", function(error, data) {
     if (error) throw error;
-    plotCirclesMap(data)
+    plotCirclesMap([])
+    // plotCirclesMap(data)
 })
+
 
 var overlay = new google.maps.OverlayView();
 
 
+
 function plotCirclesMap(data){
 
+    overlay.setMap(null);
     // Add the container when the overlay is added to the map.
     overlay.onAdd = function() {
         var tooltip = d3.select(this.getPanes().overlayLayer).append("div")
@@ -34,6 +38,11 @@ function plotCirclesMap(data){
             .style("opacity", 0);
         var layer = d3.select(this.getPanes().overlayMouseTarget).append("div")
             .attr("class", "stations")
+
+        overlay.onRemove=function(){
+            layer.remove();
+        }
+
 
         // Draw each marker as a separate SVG element.
         // We could use a single SVG, but what size would it have?
@@ -102,5 +111,6 @@ function plotCirclesMap(data){
     }
     // Bind our overlay to the map…
     overlay.setMap(map);
+
 };
  
