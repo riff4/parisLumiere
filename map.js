@@ -34,6 +34,9 @@ d3.json("data/dataComplete.json", function(error, data) {
             
       var projection = this.getProjection(),
           padding = 10;
+      data=data.filter(function(el){
+          return el.fields.type_de_tournage=='LONG METRAGE'
+        });
       var marker = layer.selectAll("svg")
           .data(d3.entries(data))
           .each(transform) // update existing markers
@@ -58,11 +61,23 @@ d3.json("data/dataComplete.json", function(error, data) {
               tooltip.html('Titre : '+d.value.fields.titre+'<br>'+'Réalisateur : '+d.value.fields.realisateur+'<br>'+"Date de début : "+d.value.fields.date_debut+'<br>'+"Date de fin : "+d.value.fields.date_fin+'<br>'+"Note : "+d.value.fields.note+'<br>'+"Genre : "+d.value.fields.genre)
                 .style("left", (d3.event.pageX + 5) + "px")
                 .style("top", (d3.event.pageY - 28) + "px");
-      	})
+              var titreChoisi=this.__data__.value.fields.titre;
+              d3.selectAll(".circle_map")
+                  .filter(function(el){
+                      return titreChoisi!=el.value.fields.titre;
+                  })
+                  .transition()
+                  .duration(400)
+                  .style("opacity", 0.1);
+            })
      	.on("mouseout", function(d) {
           tooltip.transition()
           .duration(200)
           .style("opacity", 0);
+          d3.selectAll("circle")
+              .transition()
+              .duration(400)
+              .style("opacity", 1);
       });
       
       function transform(d) {
