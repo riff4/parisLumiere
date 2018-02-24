@@ -97,7 +97,7 @@ function plotCirclesMap(data){
 
 
                 });
-
+            filter_function()
             function transform(d) {
                 if(!(typeof d.fields.xy === "undefined")){
                     d = new google.maps.LatLng(d.fields.xy[0],d.fields.xy[1]);
@@ -107,6 +107,7 @@ function plotCirclesMap(data){
                         .style("top", d.y  - padding + "px");
                 }
             }
+
         };
     }
     // Bind our overlay to the map…
