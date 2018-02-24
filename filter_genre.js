@@ -50,7 +50,7 @@ function filter_function() {
     dataFull=d3.selectAll(".circle_map")
         .filter(function(e){
             return (
-                (!e.value.fields.genre.includes(comedie) && !e.value.fields.genre.includes(drame) && !e.value.fields.genre.includes(action) && !e.value.fields.genre.includes(romance) && !e.value.fields.genre.includes(thriller) )
+                (!e.fields.genre.includes(comedie) && !e.fields.genre.includes(drame) && !e.fields.genre.includes(action) && !e.fields.genre.includes(romance) && !e.fields.genre.includes(thriller) )
             )
 
         });
@@ -59,7 +59,7 @@ function filter_function() {
     d3.selectAll(".circle_map")
        .filter(function(e){
             return ( 
-                (!e.value.fields.genre.includes(comedie) && !e.value.fields.genre.includes(drame) && !e.value.fields.genre.includes(action) && !e.value.fields.genre.includes(romance) && !e.value.fields.genre.includes(thriller) )
+                (!e.fields.genre.includes(comedie) && !e.fields.genre.includes(drame) && !e.fields.genre.includes(action) && !e.fields.genre.includes(romance) && !e.fields.genre.includes(thriller) )
        /*          &&
              (e.value.fields.note >= hmaxN || e.value.fields.note <= hminN)*/
                     )
@@ -68,7 +68,7 @@ function filter_function() {
     
         d3.selectAll(".circle_map")
        .filter(function(e){
-            return ((e.value.fields.genre.includes(comedie) || e.value.fields.genre.includes(drame) || e.value.fields.genre.includes(action) || e.value.fields.genre.includes(romance) || e.value.fields.genre.includes(thriller))
+            return ((e.fields.genre.includes(comedie) || e.fields.genre.includes(drame) || e.fields.genre.includes(action) || e.fields.genre.includes(romance) || e.fields.genre.includes(thriller))
             /*    ||
               (e.value.fields.note < hmaxN && e.value.fields.note > hminN)   */
                    )
@@ -76,7 +76,7 @@ function filter_function() {
        .transition().duration(400).style("opacity", "1");
 
         dataFull['_groups']['0'].forEach(function(d){
-            dataNo.push(d.__data__.value.fields.titre)
+            dataNo.push(d.__data__.fields.titre)
         });
         return dataNo;
     

@@ -45,7 +45,7 @@ function plotCirclesMap(data){
                 return el.fields.type_de_tournage=='LONG METRAGE'
             });
             var marker = layer.selectAll("svg")
-                .data(d3.entries(data))
+                .data(data,function(d){return d.recordid})
                 .each(transform) // update existing markers
                 .enter().append("svg")
                 .each(transform)
@@ -60,20 +60,20 @@ function plotCirclesMap(data){
                 .attr("cx", padding)
                 .attr("cy", padding)
                 .attr("class","circle_map")
-                .style("fill", function(d){return colours(format(d.value.fields.date_debut))})
+                .style("fill", function(d){return colours(format(d.fields.date_debut))})
                 .on("mouseover", function(d) {
                     dataNo=filter_function();
-                    if(dataNo.includes(this.__data__.value.fields.titre)==false){
+                    if(dataNo.includes(this.__data__.fields.titre)==false){
                         tooltip.transition()
                             .duration(200)
                             .style("opacity", .9);
-                        tooltip.html('Titre : ' + d.value.fields.titre + '<br>' + 'Réalisateur : ' + d.value.fields.realisateur + '<br>' + "Date de début : " + d.value.fields.date_debut + '<br>' + "Date de fin : " + d.value.fields.date_fin + '<br>' + "Note : " + d.value.fields.note + '<br>' + "Genre : " + d.value.fields.genre)
+                        tooltip.html('Titre : ' + d.fields.titre + '<br>' + 'Réalisateur : ' + d.fields.realisateur + '<br>' + "Date de début : " + d.fields.date_debut + '<br>' + "Date de fin : " + d.fields.date_fin + '<br>' + "Note : " + d.fields.note + '<br>' + "Genre : " + d.fields.genre)
                             .style("left", (d3.event.pageX + 5) + "px")
                             .style("top", (d3.event.pageY - 28) + "px");
-                        var titreChoisi = this.__data__.value.fields.titre;
+                        var titreChoisi = this.__data__.fields.titre;
                         d3.selectAll(".circle_map")
                             .filter(function (el) {
-                                return titreChoisi != el.value.fields.titre;
+                                return titreChoisi != el    .fields.titre;
                             })
                             .transition()
                             .duration(400)
@@ -90,8 +90,8 @@ function plotCirclesMap(data){
                 });
 
             function transform(d) {
-                if(!(typeof d.value.fields.xy === "undefined")){
-                    d = new google.maps.LatLng(d.value.fields.xy[0],d.value.fields.xy[1]);
+                if(!(typeof d.fields.xy === "undefined")){
+                    d = new google.maps.LatLng(d.fields.xy[0],d.fields.xy[1]);
                     d = projection.fromLatLngToDivPixel(d);
                     return d3.select(this)
                         .style("left", d.x - padding + "px")
