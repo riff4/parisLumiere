@@ -205,5 +205,6 @@ var margin = {top:20, right:50, bottom:0, left:20},
                     return "#eaeaea";
                 }
             })
+        plotCirclesMap(newData)
     }
 
