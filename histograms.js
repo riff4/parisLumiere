@@ -96,12 +96,12 @@ var margin = {top:20, right:50, bottom:0, left:20},
 
     ////////// load data //////////
 
-    d3.json("data/dataComplete.json",function(error,data){
+    d3.json("data/dataCompleteFilms.json",function(error,data){
         if (error) throw error;
         // Checking
         var data_triee = data.filter(function(d) {
             console.log();
-            return (d.fields.note >= 0 && d.fields.type_de_tournage=='LONG METRAGE');
+            return (d.fields.note >= 0);
         });
 
         var bins1 = histo1(data_triee);
