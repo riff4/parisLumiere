@@ -14,9 +14,10 @@ body {
 }
 
 .formulaire {
-    text-align: center;
         font-size: 14px;
+        margin-left: 20px;
 }
+
 
 label{
     font-weight: bold;

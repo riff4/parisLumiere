@@ -17,7 +17,7 @@ var colours = d3.scaleOrdinal()
    .range(["#6f63bb","#8a60b0","#ba43b4","#c7519c","#d63a3a","#ff7f0e","#ffaa0e","#bcbd22","#78a641","#2ca030","#12a2a8","#1f83b4"]);
 
 
-d3.json("data/dataCompleteFilms.json", function(error, data) {
+d3.json("data/dataComplete.json", function(error, data) {
     if (error) throw error;
     plotCirclesMap([])
    // plotCirclesMap(data)
@@ -50,6 +50,9 @@ function plotCirclesMap(data){
 
             var projection = this.getProjection(),
                 padding = 10;
+            data=data.filter(function(el){
+                return el.fields.type_de_tournage=='LONG METRAGE'
+            });
             var marker = layer.selectAll("svg")
                 .data(data,function(d){return d.recordid})
                 .each(transform) // update existing markers
@@ -79,7 +82,7 @@ function plotCirclesMap(data){
                         var titreChoisi = this.__data__.fields.titre;
                         d3.selectAll(".circle_map")
                             .filter(function (el) {
-                                return titreChoisi != el.fields.titre;
+                                return titreChoisi != el    .fields.titre;
                             })
                             .transition()
                             .duration(400)
