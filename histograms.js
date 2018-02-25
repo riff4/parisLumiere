@@ -166,7 +166,7 @@ var margin = {top:20, right:50, bottom:0, left:20},
 
     });
 
-
+    function plotCirclesMap(date){console.log("waiting for definition")};
     
     function update(dmin,dmax, nmin, nmax, dataset) {
         // filter data set and redraw plot
