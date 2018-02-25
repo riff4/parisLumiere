@@ -30,7 +30,7 @@ var margin = {top:20, right:50, bottom:0, left:20},
 
     // x scale for time
     var x1 = d3.scaleLinear()
-        .domain([1,10])
+        .domain([0,10])
         .range([0, width]);
 
     // y scale for histogram
@@ -101,9 +101,9 @@ var margin = {top:20, right:50, bottom:0, left:20},
         // Checking
         var data_triee = data.filter(function(d) {
             console.log();
-            return (d.fields.note > 0);
+            return (d.fields.note >= 0 && d.fields.type_de_tournage=='LONG METRAGE');
         });
-        
+
         var bins1 = histo1(data_triee);
         var bins = histoTime(data_triee);
 
@@ -150,7 +150,7 @@ var margin = {top:20, right:50, bottom:0, left:20},
             .attr("x", 1)
             .attr("width", function(d) { return x1(d.x1) - x1(d.x0)-1; })
             .attr("height", function(d) { return histHeight1 - y1(d.length); })
-            .attr("fill", function(d){return d3.interpolateRdYlGn(d.x0/10)});
+            .attr("fill", function(d){return colours(d.x0)});
 
         bar1.append("text")
             .attr("dy", ".75em")
@@ -171,7 +171,7 @@ var margin = {top:20, right:50, bottom:0, left:20},
     function update(dmin,dmax, nmin, nmax, dataset) {
         // filter data set and redraw plot
         var newData = dataset.filter(function(d) {
-            return (d.fields.note > nmin) && (d.fields.note < nmax) && (format(d.fields.date_debut) < dmax) && (format(d.fields.date_debut) > dmin);
+            return (d.fields.note >= nmin) && (d.fields.note < nmax) && (format(d.fields.date_debut) < dmax) && (format(d.fields.date_debut) > dmin);
         });
         drawPlot(newData);
         // histogram bar colours
@@ -205,7 +205,7 @@ var margin = {top:20, right:50, bottom:0, left:20},
         .attr("class", "brush")
         .call(brushTime);
 
-    var minNote=1; 
+    var minNote=0;
     var maxNote=10;
 
     brushgTime.call(brushTime.move, [xTime(startDate)+margin.left, xTime(endDate)+margin.left]);
