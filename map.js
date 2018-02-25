@@ -79,7 +79,7 @@ function plotCirclesMap(data){
                         var titreChoisi = this.__data__.fields.titre;
                         d3.selectAll(".circle_map")
                             .filter(function (el) {
-                                return titreChoisi != el    .fields.titre;
+                                return titreChoisi != el.fields.titre;
                             })
                             .transition()
                             .duration(400)
