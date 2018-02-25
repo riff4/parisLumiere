@@ -204,7 +204,7 @@ var margin = {top:20, right:50, bottom:0, left:20},
                 } else {
                     return "#eaeaea";
                 }
-            })
+            });
         plotCirclesMap(newData)
     }
 

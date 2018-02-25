@@ -14,7 +14,7 @@ var margin = {top:20, right:50, bottom:0, left:20},
 
     var dateArray = d3.timeMonth(startDate, endDate);
 
-    var coloursDate = d3.scaleOrdinal()
+    var colours = d3.scaleOrdinal()
         .domain(dateArray)
         .range(["#6f63bb","#8a60b0","#ba43b4","#c7519c","#d63a3a","#ff7f0e","#ffaa0e","#bcbd22","#78a641","#2ca030","#12a2a8","#1f83b4"]);
 
@@ -123,7 +123,7 @@ var margin = {top:20, right:50, bottom:0, left:20},
             .attr("x", 1)
             .attr("width", function(d) { return xTime(d.x1) - xTime(d.x0) - 1; })
             .attr("height", function(d) { return 110 + histHeight - y(d.length); })
-            .attr("fill", function(d) { return coloursDate(d.x0); });
+            .attr("fill", function(d) { return colours(d.x0); });
 
         bar.append("text")
             .attr("dy", ".75em")
@@ -148,7 +148,7 @@ var margin = {top:20, right:50, bottom:0, left:20},
         bar1.append("rect")
             .attr("class", "barNote")
             .attr("x", 1)
-            .attr("width", function(d) { return x1(d.x1) - x1(d.x0) - 1; })
+            .attr("width", function(d) { return x1(d.x1) - x1(d.x0)-1; })
             .attr("height", function(d) { return histHeight1 - y1(d.length); })
             .attr("fill", function(d){return d3.interpolateRdYlGn(d.x0/10)});
 
@@ -178,7 +178,7 @@ var margin = {top:20, right:50, bottom:0, left:20},
         d3.selectAll(".barTime")
             .attr("fill", function(d) {
                 if ((d.x0 < dmax) && (d.x0 >= dmin)) {
-                    return coloursDate(d.x0);
+                    return colours(d.x0);
                 } else {
                     return "#eaeaea";
                 }
@@ -188,7 +188,7 @@ var margin = {top:20, right:50, bottom:0, left:20},
         d3.selectAll(".barNote")
             .attr("fill", function(d) {
                 if ((d.x0 < nmax) && (d.x0 >= nmin)) {
-                    return coloursDate(d.x0);
+                    return colours(d.x0);
                 } else {
                     return "#eaeaea";
                 }
@@ -273,7 +273,7 @@ var margin = {top:20, right:50, bottom:0, left:20},
             .append("circle")
             .attr("class", "location")
             .attr("cx", function(d) { return format(d.fields.date_debut).getMonth()*45+(-0)+format(d.fields.date_debut).getDate(); })
-            .style("fill", function(d) { return coloursDate(d3.timeMonth(format(d.fields.date_debut))); })
+            .style("fill", function(d) { return colours(d3.timeMonth(format(d.fields.date_debut))); })
             //.style("stroke", function(d) { return coloursDate(d3.timeYear(d.date)); })
             .style("opacity", 0.3)
             .attr("r", 4)

@@ -14,13 +14,13 @@ var startDate = new Date("2016-01-01"),
 var dateArray = d3.timeMonth(startDate, endDate);
 var colours = d3.scaleOrdinal()
     .domain(dateArray)
-    .range(["#6f63bb","#8a60b0","#ba43b4","#c7519c","#d63a3a","#ff7f0e","#ffaa0e","#bcbd22","#78a641","#2ca030","#12a2a8","#1f83b4"]);
+   .range(["#6f63bb","#8a60b0","#ba43b4","#c7519c","#d63a3a","#ff7f0e","#ffaa0e","#bcbd22","#78a641","#2ca030","#12a2a8","#1f83b4"]);
 
 
 d3.json("data/dataComplete.json", function(error, data) {
     if (error) throw error;
     plotCirclesMap([])
-    // plotCirclesMap(data)
+   // plotCirclesMap(data)
 })
 
 
@@ -69,7 +69,7 @@ function plotCirclesMap(data){
                 .attr("cx", padding)
                 .attr("cy", padding)
                 .attr("class","circle_map")
-                .style("fill", function(d){return colours(format(d.fields.date_debut))})
+                .style("fill", function(d){return colours(d3.timeMonth(format(d.fields.date_debut)))})
                 .on("mouseover", function(d) {
                     dataNo=filter_function();
                     if(dataNo.includes(this.__data__.fields.titre)==false){
