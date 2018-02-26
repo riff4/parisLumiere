@@ -34,8 +34,8 @@
   
  It is worth noticing that this adress the shot for different types of motion pictures : movie, but also series and TV shows. 
  We decided to focus only on movies. In terms of figures, our dataset is made of : 
- - 115 movies
- - 1843 shots
+ - 118 movies
+ - 1851 shots
  
  Unfortunately this first database is not enough for us. We wished to be able to analyse information from the movies, for instance its Genre, ratings, popularity and so on.  
  To obtain this information, we used the imDB API : [tmDB](https://www.themoviedb.org/documentation/api). 
@@ -65,12 +65,8 @@
  
 | Movies | Shots | Movies with missing information |
 | ------------- | ------------- | ------------- |
-| 118  | 1843 | 39 (33%) |
- 
- 
+| 118  | 1851 | 39 (33%) |
 
- 
- 
  
  ## Graphic Design 
  
