@@ -33,7 +33,9 @@
   - **latitude/longitude**
   
  It is worth noticing that this adress the shot for different types of motion pictures : movie, but also series and TV shows. 
- We decided to focus only on movies.
+ We decided to focus only on movies. In terms of figures, our dataset is made of : 
+ - 115 movies
+ - 1843 shots
  
  Unfortunately this first database is not enough for us. We wished to be able to analyse information from the movies, for instance its Genre, ratings, popularity and so on.  
  To obtain this information, we used the imDB API : [tmDB](https://www.themoviedb.org/documentation/api). 
@@ -46,7 +48,22 @@
  At this point we have the Paris Open Data `JSON` file and the tmDB API. 
  In order to add to every movie in the Paris Open Data its tmDB information; we will proceed in several steps.
  
- At first, we will query the API using the Python Package : [tmDB Simple](https://pypi.python.org/pypi/tmdbsimple). 
+ At first, we will query the API though the Python Package : [tmDB Simple](https://pypi.python.org/pypi/tmdbsimple) using the movie title. 
+ 
+ This first step provides a great amount of new data. But it needs processing. In deed we face two kinds of issues : 
+ - **several movies for one title** : the API provides several references for one title. We have to choose manually which one is the right one. 
+ - **missing information** : as we have feared, tmDB is unable to provide us with all the information we have dreamed of. In some cases because the database is uncomplete, in other cases because the information does not exist yet: the movie is not out or has been canceled. 
+ 
+ The second issue leads us to carefully choose what information we wish to add to every movie. We decided to add only the genre and the ratings. 
+ To deal with the latter issue, we chose to inspect manually every movie with missing information ( about 40 out of 115) and add manually if it exists using the site [SensCritique](https://www.senscritique.com/).
+ 
+ This entire pipeline has handled using Python.
+ 
+ ### Data presentation
+ 
+ Finally, we reach the following dataset :
+ 
+ 
  
  
  
