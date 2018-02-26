@@ -63,10 +63,12 @@
  
  Finally, we reach the following dataset :
  
+| Movies | Shots | Movies with missing information |
+| ------------- | ------------- | ------------- |
+| 118  | 1843 | 39 (33%) |
  
  
- 
- 
+
  
  
  
