@@ -38,9 +38,20 @@
  Unfortunately this first database is not enough for us. We wished to be able to analyse information from the movies, for instance its Genre, ratings, popularity and so on.  
  To obtain this information, we used the imDB API : [tmDB](https://www.themoviedb.org/documentation/api). 
  imDB is one the largest movie database available on the Internet, so its API seemed appropriate for our project. It gives many informations for many movies. Asking information about Fight Club lead for instance to this [page](https://api.themoviedb.org/3/movie/550?api_key=ca4eaa0dc3f34672b121a95ed7a74541).
+ 
  Still, we have to havekeep in mind that this database is US-oriented, so it is very possible that french movies are not as well documented as Fight Club.
  
  ### Data fusion and corrections
+ 
+ At this point we have the Paris Open Data `JSON` file and the tmDB API. 
+ In order to add to every movie in the Paris Open Data its tmDB information; we will proceed in several steps.
+ 
+ At first, we will query the API using the Python Package : [tmDB Simple](https://pypi.python.org/pypi/tmdbsimple). 
+ 
+ 
+ 
+ 
+ 
  
  ## Graphic Design 
  
