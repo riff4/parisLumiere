@@ -70,6 +70,17 @@
  
  ## Graphic Design 
  
+ First, we obviously chose to show a map with the distribution of all shootings locations in Paris.
+ Then, based on the different informations we have been able to get, we chose to let the user be able to filter the data on 3 criterias : the dates of shootings, the ratings of the movies and the genre of the movies.
+ 
+ ### Map
+ 
+ The map used comes from a javascript API for Google Maps. We added the filming locations as circles colored in function of the filming time with the same color scale as the time histogram.
+ 
+ We also added a tooltip when the mouse is on a point to display the following informations : the title of the movie, the film director, starting and the ending dates of the shooting, the genre and the rating of the movie.
+ 
+![alt tag](https://github.com/alexandrospopov/parisLumiere/blob/master/img/map.png)
+ 
  ## Using the Tool 
  
  ## Interesting results
