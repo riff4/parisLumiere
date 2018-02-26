@@ -91,6 +91,11 @@
 
 ![alt tag](https://github.com/alexandrospopov/parisLumiere/blob/master/img/histograms.png)
  
+ ### Scatterplot
+ 
+ To complete the map visualisation, we made a scatter plot with the timeline and borough as coordinates. We linked this plot with two brushes for more interactivity.
+ 
+![alt tag](https://github.com/alexandrospopov/parisLumiere/blob/master/img/scatterplot.png)
  
  ## Using the Tool 
  
