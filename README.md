@@ -35,7 +35,8 @@
  
  Unfortunately this first database is not enough for us. We wished to be able to analyse information from the movies, for instance its Genre, ratings, popularity and so on.  
  To obtain this information, we used the imDB API : [tmDB](https://www.themoviedb.org/documentation/api). 
- imDB is one the largest movie database available on the Internet, so its API seemed appropriate for our project. It gives to many informations for many movies.
+ imDB is one the largest movie database available on the Internet, so its API seemed appropriate for our project. It gives [many informations](https://api.themoviedb.org/3/movie/550?api_key=ca4eaa0dc3f34672b121a95ed7a74541) for many movies.
+ 
  
  ## Graphic Design 
  
