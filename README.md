@@ -18,6 +18,19 @@
  
  ## Data Acquisition
  
+ Our initial source of information ist the [Paris Movie Shooting Records](https://opendata.paris.fr/explore/dataset/tournagesdefilmsparis2011/table/?refine.type_de_tournage=LONG+METRAGE&location=11,48.84663,2.34995) that we have exported as a `JSON` file. 
+ This first input provided us with the following information for every shot :
+  - **title**
+  - **director**
+  - shot adress
+  - company
+  - **type of the movie shot**
+  - **district**
+  - **date of beginning** 
+  - **date of ending** 
+  - **latitude/longitude**
+  
+ 
  ## Graphic Design 
  
  ## Using the Tool 
