@@ -18,6 +18,8 @@
  
  ## Data Acquisition
  
+ ### Sources of information 
+ 
  Our initial source of information ist the [Paris Movie Shooting Records](https://opendata.paris.fr/explore/dataset/tournagesdefilmsparis2011/table/?refine.type_de_tournage=LONG+METRAGE&location=11,48.84663,2.34995) that we have exported as a `JSON` file. 
  This first input provided us with the following information for every shot :
   - **title**
@@ -35,8 +37,10 @@
  
  Unfortunately this first database is not enough for us. We wished to be able to analyse information from the movies, for instance its Genre, ratings, popularity and so on.  
  To obtain this information, we used the imDB API : [tmDB](https://www.themoviedb.org/documentation/api). 
- imDB is one the largest movie database available on the Internet, so its API seemed appropriate for our project. It gives [many informations](https://api.themoviedb.org/3/movie/550?api_key=ca4eaa0dc3f34672b121a95ed7a74541) for many movies.
+ imDB is one the largest movie database available on the Internet, so its API seemed appropriate for our project. It gives many informations for many movies. Asking information about Fight Club lead for instance to this [page](https://api.themoviedb.org/3/movie/550?api_key=ca4eaa0dc3f34672b121a95ed7a74541).
+ Still, we have to havekeep in mind that this database is US-oriented, so it is very possible that french movies are not as well documented as Fight Club.
  
+ ### Data fusion and corrections
  
  ## Graphic Design 
  
