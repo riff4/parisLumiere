@@ -71,7 +71,7 @@
  ## Graphic Design 
  
  First, we obviously chose to show a map with the distribution of all shootings locations in Paris.
- Then, based on the different informations we have been able to get, we chose to let the user be able to filter the data on 3 criterias : the dates of shootings, the ratings of the movies and the genre of the movies.
+ Then, based on the different informations we have been able to get, we chose to let the user be able to filter the data on 4 criterias : the dates of shootings, the ratings of the movies, the borough of the shooting and the genre of the movies.
  
  ### Map
  
@@ -80,6 +80,17 @@
  We also added a tooltip when the mouse is on a point to display the following informations : the title of the movie, the film director, starting and the ending dates of the shooting, the genre and the rating of the movie.
  
 ![alt tag](https://github.com/alexandrospopov/parisLumiere/blob/master/img/map.png)
+ 
+ ### Tickboxes
+ 
+ To filter the shooting based on the genre criteria, we chose tickboxes which seemed to be the easiest and the moste userfriendly way to go. It directly sorts out the points on the map.
+ 
+ ### Histograms
+ 
+ To display the distribution of the ratings and shooting times, we used simple bar charts with the d3.histogram function. We added two brushes to let the possibility to the user to filter them as he wishes. Again, the points on the map are affected by those filters.
+
+![alt tag](https://github.com/alexandrospopov/parisLumiere/blob/master/img/histograms.png)
+ 
  
  ## Using the Tool 
  
