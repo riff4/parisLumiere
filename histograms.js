@@ -124,6 +124,21 @@ var margin = {top:20, right:50, bottom:0, left:20},
             .style ("fill","grey")
             .style ("font-weight","bold")
             ;
+        
+            var larrondi=[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17];
+            var arrondissements = histTime.selectAll(".arrondissements")
+            .data(larrondi)
+            .enter()
+            .append("text")
+            .attr("class", "legend")
+            .attr("transform", function(d) { console.log(d);
+                return "translate(" + (-15) + "," + (d/22*(300)+(height/2)+(+3))  + ")";
+            })
+            .text(function(d){return d;})
+            .style ("font-size","11px")
+            .style ("fill","grey")
+            .style ("font-weight","bold")
+            ;
 
         var bar = histTime.selectAll(".barTime")
             .data(bins)
@@ -296,8 +311,10 @@ var margin = {top:20, right:50, bottom:0, left:20},
             .attr("cy", function(d) { return Math.random()*((height/2+150)-(height/2-150))+(height/2-90); })
             .transition()
             .duration(400)
-            .attr("cy", function(d) { return (d.fields.ardt-75000)/22*((height/2+150)-(height/2-150))+(height/2-90); })
-;
+            .attr("cy", function(d) { return (d.fields.ardt-75000)/22*((height/2+150)-(height/2-150))+(height/2-90); });
+        
+        
+
         // if filtered dataset has less circles than already existing, remove excess
         locations.exit()
             .remove();
