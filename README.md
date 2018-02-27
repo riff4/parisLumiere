@@ -13,7 +13,7 @@
  One dataset that we liked instantly was the [Paris Movie Shooting Records](https://opendata.paris.fr/explore/dataset/tournagesdefilmsparis2011/table/?refine.type_de_tournage=LONG+METRAGE&location=11,48.84663,2.34995) fro m the Paris Open Data website.
   It provided us with the basic data of every shot made in Paris in 2016. Choosing a movie, we were able to see where it had been shot in Paris. 
   
- ![general screenshot](https://github.com/alexandrospopov/parisLumiere/blob/master/img/opendata.png)
+ ![opendata screenshot](https://github.com/alexandrospopov/parisLumiere/blob/master/img/opendata.png)
  
  There were so many questions we could finally answer ! What movies have been shot close to my work or my home ? Where are the movies shot in winter and in spring ? Are movies only in touristic areas ? Where are shot the best movies in Paris ? Does any director know about my most romantic spot in Paris ..? 
  
@@ -43,6 +43,10 @@
  Unfortunately this first database is not enough for us. We wished to be able to analyse information from the movies, for instance its Genre, ratings, popularity and so on.  
  To obtain this information, we used the imDB API : [tmDB](https://www.themoviedb.org/documentation/api). 
  imDB is one the largest movie database available on the Internet, so its API seemed appropriate for our project. It gives many informations for many movies. Asking information about Fight Club lead for instance to this [page](https://api.themoviedb.org/3/movie/550?api_key=ca4eaa0dc3f34672b121a95ed7a74541).
+ 
+ ![tmdb logo]( https://s2.qwant.com/thumbr/0x0/5/7/0ff55ead5ffa0c28e85a2b593b18d3/b_1_q_0_p_0.jpg?u=http%3A%2F%2Fwww.team-mediaportal.com%2Fimages%2Fstories%2FhomepageV3%2Farticles%2Fsponsors%2Ftmdb-logo-2.png&q=0&b=1&p=0&a=1)
+
+
  
  Still, we have to havekeep in mind that this database is US-oriented, so it is very possible that french movies are not as well documented as Fight Club.
  
