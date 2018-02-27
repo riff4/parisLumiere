@@ -1,6 +1,7 @@
  # ParisLumiere 
  
  By @riff4, @dmignon1907 and @alexandrospopov.
+![general screenshot](https://github.com/alexandrospopov/parisLumiere/blob/master/img/general.png)
 
  ## Introduction
  
