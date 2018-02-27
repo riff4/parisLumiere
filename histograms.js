@@ -109,7 +109,37 @@ var margin = {top:20, right:50, bottom:0, left:20},
 
         y.domain([0, d3.max(bins, function(d) { return d.length; })]);
         
-                    var lMonths=['Jan','Fev','Mar','Apr','May','Jun','Jul','Aug','Sept','Oct','Nov','Dec'];
+            var lNotes=['NaN',1,2,3,4,5,6,7,8,9,10];
+        
+            var note1 = histTime.selectAll(".note1")
+            .data(lNotes)
+            .enter()
+            .append("text")
+            .attr("class", "note1")
+            .attr("transform", function(d,i) {
+                return "translate(" + (i*52.5) + "," + (histHeight1+11) + ")";
+            })
+            .text(function(d){return d;})
+            .style ("font-size","11px")
+            .style ("fill","grey")
+            .style ("font-weight","bold")
+            ;
+        
+            var lMonths=['Jan','Fev','Mar','Apr','May','Jun','Jul','Aug','Sept','Oct','Nov','Dec'];
+        
+            var mois = histTime.selectAll(".mois")
+            .data(lMonths)
+            .enter()
+            .append("text")
+            .attr("class", "mois")
+            .attr("transform", function(d,i) {
+                return "translate(" + (i*44+12) + "," + ((-30)+d3.max(bins, function(d) { return d.length; }))  + ")";
+            })
+            .text(function(d){return d;})
+            .style ("font-size","11px")
+            .style ("fill","grey")
+            .style ("font-weight","bold")
+            ;
         
             var legende = histTime.selectAll(".legende")
             .data(lMonths)
