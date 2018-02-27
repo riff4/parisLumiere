@@ -60,9 +60,12 @@
  This first step provides a great amount of new data. But it needs processing. In deed we face two kinds of issues : 
  - **several movies for one title** : the API provides several references for one title. We have to choose manually which one is the right one. 
  - **missing information** : as we have feared, tmDB is unable to provide us with all the information we have dreamed of. In some cases because the database is uncomplete, in other cases because the information does not exist yet: the movie is not out or has been canceled. 
- 
+  
  The second issue leads us to carefully choose what information we wish to add to every movie. We decided to add only the genre and the ratings. 
  To deal with the latter issue, we chose to inspect manually every movie with missing information ( about 40 out of 115) and add manually if it exists using the site [SensCritique](https://www.senscritique.com/).
+ 
+  ![tmdb logo](  https://s1.qwant.com/thumbr/0x0/0/5/0114a7edba26ac26ff9a8ef3e6916d/b_1_q_0_p_0.jpg?u=https%3A%2F%2Fwww.digischool.fr%2Fimages%2Farticle%2F4948_1.jpg&q=0&b=1&p=0&a=1)
+
  
  This entire pipeline has handled using Python.
  
