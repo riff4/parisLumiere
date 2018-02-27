@@ -1,6 +1,6 @@
 var margin = {top:20, right:50, bottom:0, left:20},
         width = 600 - margin.left - margin.right,
-        height = 490 - margin.top - margin.bottom;
+        height = 560 - margin.top - margin.bottom;
 
     var histHeight = 90;
     var histHeight1 = 90;
@@ -147,7 +147,7 @@ var margin = {top:20, right:50, bottom:0, left:20},
             .append("text")
             .attr("class", "legend")
             .attr("transform", function(d) {
-                return "translate(" + 0 + "," + ((-10)+d3.max(bins, function(d) { return d.length; }))  + ")";
+                return "translate(" + 0 + "," + ((0)+d3.max(bins, function(d) { return d.length; }))  + ")";
             })
             .text("Visualisation de la répartition des tournages suivant les arrondissements")
             .style ("font-size","15px")
@@ -155,14 +155,14 @@ var margin = {top:20, right:50, bottom:0, left:20},
             .style ("font-weight","bold")
             ;
         
-            var larrondi=[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17];
+            var larrondi=[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20];
             var arrondissements = histTime.selectAll(".arrondissements")
             .data(larrondi)
             .enter()
             .append("text")
             .attr("class", "legend")
             .attr("transform", function(d) { console.log(d);
-                return "translate(" + (-15) + "," + (d/22*(300)+(height/2)+(+3))  + ")";
+                return "translate(" + (-15) + "," + (d/22*(300)+(height/2)+(-15))  + ")";
             })
             .text(function(d){return d;})
             .style ("font-size","11px")
@@ -338,10 +338,10 @@ var margin = {top:20, right:50, bottom:0, left:20},
             //.style("stroke", function(d) { return coloursDate(d3.timeYear(d.date)); })
             .style("opacity", 0.3)
             .attr("r", 4)
-            .attr("cy", function(d) { return Math.random()*((height/2+150)-(height/2-150))+(height/2-90); })
+            .attr("cy", function(d) { return Math.random()*((height/2+150)-(height/2-150))+(height/2-108); })
             .transition()
             .duration(400)
-            .attr("cy", function(d) { return (d.fields.ardt-75000)/22*((height/2+150)-(height/2-150))+(height/2-90); });
+            .attr("cy", function(d) { return (d.fields.ardt-75000)/22*(300)+(height/2-108); });
         
         
 
