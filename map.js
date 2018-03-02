@@ -29,6 +29,7 @@ var overlay = new google.maps.OverlayView();
 
 
 function plotCirclesMap(data){
+
     overlay.setMap(null);
     // Add the container when the overlay is added to the map.
     overlay.onAdd = function() {
@@ -96,6 +97,7 @@ function plotCirclesMap(data){
 
 
                 });
+            filter_function()
             function transform(d) {
                 if(!(typeof d.fields.xy === "undefined")){
                     d = new google.maps.LatLng(d.fields.xy[0],d.fields.xy[1]);
@@ -111,4 +113,5 @@ function plotCirclesMap(data){
     // Bind our overlay to the map…
     overlay.setMap(map);
 
-}; 
+};
+ 

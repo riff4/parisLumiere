@@ -38,7 +38,6 @@ d3.select("#cb_romance").on("click", function() {
                             filter_function()}});
 
 d3.select("#cb_thriller").on("click", function() {
-    
         if (document.getElementById("cb_thriller").checked){
                             thriller="Thriller";
                             filter_function()}
@@ -84,13 +83,6 @@ function filter_function() {
         })
        .transition().duration(400).style("opacity", "1");
 
-        d3.json("data/dataCompleteFilms.json",function(error,data){
-            var dataSelected = data.filter(function(d) {
-                return (d.fields.genre.includes(comedie) || d.fields.genre.includes(drame) || d.fields.genre.includes(action) || d.fields.genre.includes(romance) || d.fields.genre.includes(thriller) || d.fields.genre.includes(indetermine))});
-            
-            updateBars(dataSelected);
-        });
-    
         dataFull['_groups']['0'].forEach(function(d){
             dataNo.push(d.__data__.fields.titre)
         });
@@ -98,4 +90,3 @@ function filter_function() {
     
 }
     
-
