@@ -147,9 +147,9 @@ var margin = {top:20, right:50, bottom:0, left:20},
             .append("text")
             .attr("class", "legend")
             .attr("transform", function(d) {
-                return "translate(" + 0 + "," + ((0)+d3.max(bins, function(d) { return d.length; }))  + ")";
+                return "translate(" + 0 + "," + ((-0)+d3.max(bins, function(d) { return d.length; }))  + ")";
             })
-            .text("Visualisation de la répartition des tournages suivant les arrondissements")
+            .text("Movie Shootings as a function of districts and time :")
             .style ("font-size","15px")
             .style ("fill","grey")
             .style ("font-weight","bold")
@@ -341,8 +341,8 @@ var margin = {top:20, right:50, bottom:0, left:20},
             .attr("cy", function(d) { return Math.random()*((height/2+150)-(height/2-150))+(height/2-108); })
             .transition()
             .duration(400)
-            .attr("cy", function(d) { return (d.fields.ardt-75000)/22*(300)+(height/2-108); });
-        
+            .attr("cy", function(d) { return (d.fields.ardt-75000)/22*((height/2+150)-(height/2-150))+(height/2-108); });
+
         
 
         // if filtered dataset has less circles than already existing, remove excess
